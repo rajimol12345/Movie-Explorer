@@ -1,0 +1,259 @@
+.banner-section {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.banner-slide {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  align-items: flex-end;
+}
+
+.banner-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: #fff;
+  padding: 40px;
+  width: 100%;
+  text-align: left;
+}
+
+.banner-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.banner-overview {
+  max-width: 700px;
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+.banner-btn {
+  background: #e50914;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.banner-btn:hover {
+  background: #ff1b2d;
+  transform: scale(1.05);
+}
+
+.section-heading {
+  margin: 40px 0 20px;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* ==== GENERAL PAGE STYLING ==== */
+.home-page {
+  min-height: 100vh;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+}
+
+/* ==== SEARCH + FILTER ==== */
+.search-filter-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.search-input {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 240px;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #00bcd4;
+  box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
+}
+
+/* ==== FILTER BOX ==== */
+.filter-container {
+  display: flex;
+  gap: 10px;
+}
+
+.filter-container select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+  background-color: #fff;
+  color: #333;
+}
+
+/* ==== MOVIE GRID ==== */
+.movie-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.movie-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movie-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
+}
+
+.movie-card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.movie-title {
+  font-size: 1rem;
+  margin: 6px 0;
+  font-weight: 600;
+}
+
+.movie-rating {
+  font-size: 0.9rem;
+  color: #ffd700;
+}
+
+.fav-btn {
+  background: crimson;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.fav-btn:hover {
+  background: darkred;
+}
+
+/* ==== TRAILER POPUP ==== */
+.trailer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.4s ease;
+}
+
+.trailer-popup {
+  position: relative;
+  background: #000;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
+  width: 90%;
+  max-width: 700px;
+  animation: scaleUp 0.3s ease;
+}
+
+.trailer-popup iframe {
+  border-radius: 10px;
+}
+
+.close-btn {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background: crimson;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+  background: darkred;
+}
+
+/* ==== ANIMATIONS ==== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ==== ERROR + EMPTY ==== */
+.error-text,
+.no-movies {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #f8d7da;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 12px;
+  border-radius: 8px;
+  max-width: 500px;
+  margin: 20px auto;
+}
+
+/* ==== RESPONSIVE ==== */
+@media (max-width: 600px) {
+  .search-input {
+    width: 100%;
+  }
+
+  .filter-container {
+    flex-direction: column;
+  }
+
+  .trailer-popup iframe {
+    height: 300px;
+  }
+}
