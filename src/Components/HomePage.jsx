@@ -47,7 +47,6 @@ export default function HomePage() {
 
   // Fetch movies (with pagination)
   const fetchMovies = useCallback(async () => {
-    if (loading) return;
     setLoading(true);
     setError("");
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useFavorites, useFavoritesDispatch } from "../context/FavoritesContext";
+import { useFavorites } from "../context/FavoritesContext";
 import MovieCard from "./MovieCard";
 import "./Favorites.css";
 
@@ -7,7 +7,6 @@ const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
 export default function Favorites() {
   const { favorites } = useFavorites();
-  const dispatch = useFavoritesDispatch();
 
   const [trailerUrl, setTrailerUrl] = useState("");
   const [showTrailer, setShowTrailer] = useState(false);
