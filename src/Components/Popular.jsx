@@ -3,9 +3,11 @@ import axios from "axios";
 import MovieCard from "./MovieCard";
 import Spinner from "./Spinner";
 import "./Pagination.css";
+import "./Popular.css";
 
 export default function Popular() {
   const [movies, setMovies] = useState([]);
+  const [heroMovie, setHeroMovie] = useState(null);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -21,7 +23,14 @@ export default function Popular() {
       const res = await axios.get(
         `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.REACT_APP_TMDB_API_KEY}&language=en-US&page=${page}`
       );
-      setMovies(res.data.results);
+      const results = res.data.results;
+      if (results && results.length > 0) {
+        setHeroMovie(results[0]);
+        setMovies(results.slice(1));
+      } else {
+        setHeroMovie(null);
+        setMovies([]);
+      }
       setTotalPages(res.data.total_pages);
     } catch (error) {
       console.error("Error fetching movies:", error);
@@ -64,38 +73,63 @@ export default function Popular() {
 
   return (
     <div className="popular-page">
-      <h2>Popular Movies</h2>
-
       {loading ? (
         <Spinner />
       ) : (
         <>
-          <div className="movie-grid">
-            {movies.map((movie) => (
-              <MovieCard
-                key={movie.id}
-                movie={movie}
-                onClick={() => fetchTrailer(movie.id)} //  Open trailer on click
-              />
-            ))}
-          </div>
-
-          <div className="pagination">
-            <button className="page-btn" onClick={handlePrev} disabled={page === 1}>
-              ◀ Prev
-            </button>
-
-            <span className="page-info">
-              Page {page} of {totalPages}
-            </span>
-
-            <button
-              className="page-btn"
-              onClick={handleNext}
-              disabled={page === totalPages}
+          {/* Hero Section */}
+          {heroMovie && (
+            <div
+              className="popular-hero"
+              style={{
+                backgroundImage: `url(https://image.tmdb.org/t/p/original${heroMovie.backdrop_path})`,
+              }}
             >
-              Next ▶
-            </button>
+              <div className="popular-hero-overlay"></div>
+              <div className="popular-hero-content">
+                <h1 className="popular-hero-title">{heroMovie.title}</h1>
+                <p className="popular-hero-overview">{heroMovie.overview}</p>
+                <div className="popular-hero-buttons">
+                  <button
+                    className="btn-primary"
+                    onClick={() => fetchTrailer(heroMovie.id)}
+                  >
+                    ▶ Play Trailer
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="popular-content-wrapper">
+            <h2 className="section-title">Trending Now</h2>
+            <div className="movie-grid">
+              {movies.map((movie) => (
+                <MovieCard
+                  key={movie.id}
+                  movie={movie}
+                  onClick={() => fetchTrailer(movie.id)} //  Open trailer on click
+                />
+              ))}
+            </div>
+
+            <div className="pagination">
+              <button className="page-btn" onClick={handlePrev} disabled={page === 1}>
+                ◀ Prev
+              </button>
+
+              <span className="page-info">
+                Page {page} of {totalPages}
+              </span>
+
+              <button
+                className="page-btn"
+                onClick={handleNext}
+                disabled={page === totalPages}
+              >
+                Next ▶
+              </button>
+            </div>
           </div>
         </>
       )}
