@@ -6,7 +6,13 @@ import "./index.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <BrowserRouter basename="/Movie-Explorer">
+  <BrowserRouter 
+    basename="/Movie-Explorer"
+    future={{
+      v7_startTransition: true,
+      v7_relativeSplatPath: true,
+    }}
+  >
     <App />
   </BrowserRouter>
 );

@@ -122,42 +122,44 @@ export default function HomePage() {
     <div className="home-page">
       {/* Hero Banner Carousel */}
       <div className="banner-section">
-        <Swiper
-          modules={[Autoplay, Pagination, EffectFade]}
-          slidesPerView={1}
-          loop
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 4000, disableOnInteraction: false }}
-          effect="fade"
-          className="banner-swiper"
-        >
-          {bannerMovies.map((movie) => (
-            <SwiperSlide key={movie.id}>
-              <div
-                className="banner-slide"
-                style={{
-                  backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
-                }}
-              >
-                <div className="banner-overlay">
-                  <span className="banner-badge">🏆 Top Rated</span>
-                  <h2 className="banner-title">{movie.title}</h2>
-                  <p className="banner-overview">
-                    {movie.overview?.slice(0, 160)}...
-                  </p>
-                  <div className="banner-actions">
-                    <button
-                      className="banner-btn"
-                      onClick={() => fetchTrailer(movie.id)}
-                    >
-                      ▶ Watch Trailer
-                    </button>
+        {bannerMovies.length > 0 && (
+          <Swiper
+            modules={[Autoplay, Pagination, EffectFade]}
+            slidesPerView={1}
+            loop
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            effect="fade"
+            className="banner-swiper"
+          >
+            {bannerMovies.map((movie) => (
+              <SwiperSlide key={movie.id}>
+                <div
+                  className="banner-slide"
+                  style={{
+                    backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path})`,
+                  }}
+                >
+                  <div className="banner-overlay">
+                    <span className="banner-badge">🏆 Top Rated</span>
+                    <h2 className="banner-title">{movie.title}</h2>
+                    <p className="banner-overview">
+                      {movie.overview?.slice(0, 160)}...
+                    </p>
+                    <div className="banner-actions">
+                      <button
+                        className="banner-btn"
+                        onClick={() => fetchTrailer(movie.id)}
+                      >
+                        ▶ Watch Trailer
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        )}
       </div>
 
       {/* Main Content */}
