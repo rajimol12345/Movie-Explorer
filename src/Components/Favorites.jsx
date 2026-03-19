@@ -1,4 +1,3 @@
-// src/Components/Favorites.jsx
 import React, { useState } from "react";
 import { useFavorites, useFavoritesDispatch } from "../context/FavoritesContext";
 import MovieCard from "./MovieCard";
@@ -10,15 +9,10 @@ export default function Favorites() {
   const { favorites } = useFavorites();
   const dispatch = useFavoritesDispatch();
 
-  // Trailer Popup State
   const [trailerUrl, setTrailerUrl] = useState("");
   const [showTrailer, setShowTrailer] = useState(false);
 
-  const handleRemove = (movie) => {
-    dispatch({ type: "REMOVE_FAVORITE", payload: movie });
-  };
 
-  // Fetch Trailer Function
   const fetchTrailer = async (movieId) => {
     try {
       const res = await fetch(
@@ -41,18 +35,21 @@ export default function Favorites() {
 
   return (
     <div className="favorites-page">
-      <h1 className="page-title">Favorite Movies</h1>
+      <h1 className="page-title">My Favorites</h1>
 
       {favorites.length === 0 ? (
-        <p className="no-favorites">You haven’t added any favorites yet.</p>
+        <div className="no-favorites">
+          <span className="no-favorites-icon">♡</span>
+          <p>You haven't added any favorites yet.</p>
+          <p style={{ fontSize: "0.85rem", opacity: 0.6 }}>
+            Browse movies and click "Add to Favorites" to save them here.
+          </p>
+        </div>
       ) : (
         <div className="movie-grid">
           {favorites.map((movie) => (
             <div key={movie.id} className="favorite-card">
               <MovieCard movie={movie} onClick={() => fetchTrailer(movie.id)} />
-              <button className="remove-btn" onClick={() => handleRemove(movie)}>
-                Remove
-              </button>
             </div>
           ))}
         </div>
@@ -64,7 +61,7 @@ export default function Favorites() {
           <div className="trailer-popup" onClick={(e) => e.stopPropagation()}>
             <iframe
               width="100%"
-              height="400"
+              height="450"
               src={trailerUrl}
               title="Movie Trailer"
               frameBorder="0"

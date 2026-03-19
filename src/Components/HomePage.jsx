@@ -29,7 +29,7 @@ export default function HomePage() {
 
   const debouncedQuery = useDebounce(query, 600);
 
-  //  Fetch banner movies (Top Rated)
+  // Fetch banner movies (Top Rated)
   useEffect(() => {
     async function fetchBanner() {
       try {
@@ -37,7 +37,7 @@ export default function HomePage() {
           `https://api.themoviedb.org/3/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`
         );
         const data = await res.json();
-        setBannerMovies(data.results.slice(0, 5)); // Top 5 movies for banner
+        setBannerMovies(data.results.slice(0, 6));
       } catch (error) {
         console.error("Error fetching banner movies:", error);
       }
@@ -45,7 +45,7 @@ export default function HomePage() {
     fetchBanner();
   }, []);
 
-  //  Fetch movies (with pagination)
+  // Fetch movies (with pagination)
   const fetchMovies = useCallback(async () => {
     if (loading) return;
     setLoading(true);
@@ -75,7 +75,7 @@ export default function HomePage() {
     } finally {
       setLoading(false);
     }
-  }, [debouncedQuery, year, genre, page]); // Removed `loading` from dependencies
+  }, [debouncedQuery, year, genre, page]);
 
   // Reset movies when filters/search change
   useEffect(() => {
@@ -84,7 +84,7 @@ export default function HomePage() {
     setHasMore(true);
   }, [debouncedQuery, year, genre]);
 
-  //  Fetch on mount or when query/filter/page changes
+  // Fetch on mount or when query/filter/page changes
   useEffect(() => {
     fetchMovies();
   }, [fetchMovies]);
@@ -121,14 +121,14 @@ export default function HomePage() {
 
   return (
     <div className="home-page">
-      {/*  Banner Carousel Section */}
+      {/* Hero Banner Carousel */}
       <div className="banner-section">
         <Swiper
           modules={[Autoplay, Pagination, EffectFade]}
           slidesPerView={1}
           loop
           pagination={{ clickable: true }}
-          autoplay={{ delay: 3500, disableOnInteraction: false }}
+          autoplay={{ delay: 4000, disableOnInteraction: false }}
           effect="fade"
           className="banner-swiper"
         >
@@ -141,16 +141,19 @@ export default function HomePage() {
                 }}
               >
                 <div className="banner-overlay">
+                  <span className="banner-badge">🏆 Top Rated</span>
                   <h2 className="banner-title">{movie.title}</h2>
                   <p className="banner-overview">
-                    {movie.overview?.slice(0, 150)}...
+                    {movie.overview?.slice(0, 160)}...
                   </p>
-                  <button
-                    className="banner-btn"
-                    onClick={() => fetchTrailer(movie.id)}
-                  >
-                    ▶ Watch Trailer
-                  </button>
+                  <div className="banner-actions">
+                    <button
+                      className="banner-btn"
+                      onClick={() => fetchTrailer(movie.id)}
+                    >
+                      ▶ Watch Trailer
+                    </button>
+                  </div>
                 </div>
               </div>
             </SwiperSlide>
@@ -158,39 +161,42 @@ export default function HomePage() {
         </Swiper>
       </div>
 
-      {/* Search + Filter Section */}
-      <div className="search-filter-container">
-        <Search query={query} setQuery={setQuery} />
-        <Filter
-          selectedYear={year}
-          setSelectedYear={setYear}
-          selectedGenre={genre}
-          setSelectedGenre={setGenre}
-        />
+      {/* Main Content */}
+      <div className="home-content">
+        {/* Search + Filter */}
+        <div className="search-filter-container">
+          <Search query={query} setQuery={setQuery} />
+          <Filter
+            selectedYear={year}
+            setSelectedYear={setYear}
+            selectedGenre={genre}
+            setSelectedGenre={setGenre}
+          />
+        </div>
+
+        {/* Section heading */}
+        <h2 className="section-heading">All Movies</h2>
+
+        {error && <p className="error-text">{error}</p>}
+
+        {/* Movie Grid */}
+        <div className="movie-grid">
+          {movies?.length > 0 ? (
+            movies.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                onClick={() => fetchTrailer(movie.id)}
+              />
+            ))
+          ) : (
+            !loading && <p className="no-movies">No movies found.</p>
+          )}
+        </div>
+
+        {loading && <Spinner />}
+        {!hasMore && <p className="end-text">🎬 You've reached the end!</p>}
       </div>
-
-      {/*  Movies List Section */}
-      <h2 className="section-heading"> All Movies</h2>
-
-      {error && <p className="error-text">{error}</p>}
-
-      <div className="movie-grid">
-        {movies?.length > 0 ? (
-          movies.map((movie) => (
-            <MovieCard
-              key={movie.id}
-              movie={movie}
-              onClick={() => fetchTrailer(movie.id)}
-            />
-          ))
-        ) : (
-          !loading && <p className="no-movies">No movies found.</p>
-        )}
-      </div>
-
-      {/* Loading & End States */}
-      {loading && <Spinner />}
-      {!hasMore && <p className="end-text">🎥 You’ve reached the end!</p>}
 
       {/* Trailer Popup */}
       {showTrailer && (
@@ -198,7 +204,7 @@ export default function HomePage() {
           <div className="trailer-popup" onClick={(e) => e.stopPropagation()}>
             <iframe
               width="100%"
-              height="400"
+              height="450"
               src={trailerUrl}
               title="Movie Trailer"
               frameBorder="0"

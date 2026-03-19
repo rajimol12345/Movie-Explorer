@@ -1,259 +1,188 @@
+/* ============================================
+   HOMEPAGE — Banner Hero + Layout
+   ============================================ */
+.home-page {
+  min-height: 100vh;
+  background: var(--clr-bg);
+}
+
+/* ============================================
+   HERO BANNER CAROUSEL
+   ============================================ */
 .banner-section {
   position: relative;
   width: 100%;
-  height: 70vh;
+  height: 92vh;
+  max-height: 780px;
   overflow: hidden;
+}
+
+.banner-swiper {
+  width: 100%;
+  height: 100%;
 }
 
 .banner-slide {
   position: relative;
   background-size: cover;
-  background-position: center;
-  height: 70vh;
+  background-position: center top;
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: flex-end;
 }
 
+/* Cinematic gradient overlay — stronger at bottom */
+.banner-slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 15, 0.15) 0%,
+    rgba(10, 10, 15, 0.25) 40%,
+    rgba(10, 10, 15, 0.75) 70%,
+    rgba(10, 10, 15, 0.97) 100%
+  );
+  z-index: 1;
+}
+
 .banner-overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-  color: #fff;
-  padding: 40px;
+  position: relative;
+  z-index: 2;
+  padding: 56px 64px;
   width: 100%;
-  text-align: left;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+.banner-badge {
+  display: inline-block;
+  background: var(--clr-gold);
+  color: #000;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 14px;
 }
 
 .banner-title {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 10px;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: 3px;
+  line-height: 1.05;
+  color: #fff;
+  margin-bottom: 16px;
+  text-shadow: 0 4px 24px rgba(0,0,0,0.8);
+  max-width: 700px;
 }
 
 .banner-overview {
-  max-width: 700px;
-  font-size: 1rem;
-  opacity: 0.9;
-  margin-bottom: 20px;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 400;
+  color: rgba(255,255,255,0.80);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.banner-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
 }
 
 .banner-btn {
-  background: #e50914;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--clr-red);
+  color: #fff;
   border: none;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 8px;
+  padding: 14px 32px;
+  border-radius: var(--radius-pill);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s;
+  box-shadow: var(--shadow-glow-red);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
 }
 
 .banner-btn:hover {
-  background: #ff1b2d;
-  transform: scale(1.05);
+  background: var(--clr-red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 0 32px rgba(229, 9, 20, 0.65);
+}
+
+/* Swiper pagination dots */
+.banner-swiper .swiper-pagination-bullet {
+  background: rgba(255,255,255,0.5);
+  opacity: 1;
+  width: 8px;
+  height: 8px;
+  transition: all var(--transition);
+}
+
+.banner-swiper .swiper-pagination-bullet-active {
+  background: var(--clr-gold);
+  width: 28px;
+  border-radius: var(--radius-pill);
+}
+
+/* ============================================
+   CONTENT AREA BELOW BANNER
+   ============================================ */
+.home-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 24px 80px;
 }
 
 .section-heading {
-  margin: 40px 0 20px;
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-align: center;
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 3px;
+  color: var(--clr-text);
+  margin: 0 0 28px;
+  padding-left: 16px;
+  border-left: 4px solid var(--clr-gold);
 }
 
-/* ==== GENERAL PAGE STYLING ==== */
-.home-page {
-  min-height: 100vh;
-  padding: 20px;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: white;
-}
-
-/* ==== SEARCH + FILTER ==== */
-.search-filter-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 25px;
-}
-
-.search-input {
-  padding: 10px 14px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  width: 240px;
-  font-size: 16px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.search-input:focus {
-  border-color: #00bcd4;
-  box-shadow: 0 0 5px rgba(0, 188, 212, 0.5);
-}
-
-/* ==== FILTER BOX ==== */
-.filter-container {
-  display: flex;
-  gap: 10px;
-}
-
-.filter-container select {
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 15px;
-  outline: none;
-  background-color: #fff;
-  color: #333;
-}
-
-/* ==== MOVIE GRID ==== */
-.movie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-}
-
-.movie-card {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 12px;
-  border-radius: 12px;
-  text-align: center;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.movie-card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(0, 255, 255, 0.2);
-}
-
-.movie-card img {
-  width: 100%;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-
-.movie-title {
-  font-size: 1rem;
-  margin: 6px 0;
-  font-weight: 600;
-}
-
-.movie-rating {
-  font-size: 0.9rem;
-  color: #ffd700;
-}
-
-.fav-btn {
-  background: crimson;
-  border: none;
-  color: white;
-  border-radius: 6px;
-  padding: 8px 10px;
-  margin-top: 10px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.fav-btn:hover {
-  background: darkred;
-}
-
-/* ==== TRAILER POPUP ==== */
-.trailer-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 15, 15, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
-  backdrop-filter: blur(5px);
-  animation: fadeIn 0.4s ease;
-}
-
-.trailer-popup {
-  position: relative;
-  background: #000;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
-  width: 90%;
-  max-width: 700px;
-  animation: scaleUp 0.3s ease;
-}
-
-.trailer-popup iframe {
-  border-radius: 10px;
-}
-
-.close-btn {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  background: crimson;
-  border: none;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.close-btn:hover {
-  background: darkred;
-}
-
-/* ==== ANIMATIONS ==== */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+  .banner-section {
+    height: 70vh;
+    max-height: 560px;
   }
-  to {
-    opacity: 1;
+
+  .banner-overlay {
+    padding: 32px 24px;
+  }
+
+  .banner-title {
+    font-size: 2.2rem;
+  }
+
+  .home-content {
+    padding: 32px 16px 60px;
   }
 }
 
-@keyframes scaleUp {
-  from {
-    transform: scale(0.8);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-/* ==== ERROR + EMPTY ==== */
-.error-text,
-.no-movies {
-  text-align: center;
-  font-size: 1.1rem;
-  color: #f8d7da;
-  background: rgba(255, 0, 0, 0.1);
-  padding: 12px;
-  border-radius: 8px;
-  max-width: 500px;
-  margin: 20px auto;
-}
-
-/* ==== RESPONSIVE ==== */
-@media (max-width: 600px) {
-  .search-input {
-    width: 100%;
+@media (max-width: 480px) {
+  .banner-section {
+    height: 60vh;
   }
 
-  .filter-container {
-    flex-direction: column;
-  }
-
-  .trailer-popup iframe {
-    height: 300px;
+  .banner-btn {
+    padding: 12px 24px;
+    font-size: 0.875rem;
   }
 }

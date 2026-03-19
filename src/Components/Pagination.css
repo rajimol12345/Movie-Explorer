@@ -1,71 +1,45 @@
-.popular-page {
-  padding: 20px;
-  color: white;
-  font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #141e30, #243b55);
-  min-height: 100vh;
-}
+/* Pagination shared — already covered in Popular.css and App.css */
+/* This file retains the pagination pill style for any component that imports it */
 
-.popular-page h2 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 1.8rem;
-  color: white;
-}
-
-.movie-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  justify-content: center;  /* centers the entire grid */
-  align-items: center;
-  max-width: 1200px;        /*  optional: limit max width */
-  margin: 0 auto;           /*  centers the grid container */
-  padding: 0 20px;
-}
-
-/* Pagination Section */
 .pagination {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
-  gap: 15px;
+  gap: 16px;
+  margin: 40px auto;
+  max-width: var(--max-width);
 }
 
 .page-btn {
-  background: #00bcd4;
-  border: none;
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 8px;
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-muted);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  font-size: 1rem;
-  transition: background 0.3s ease;
+  transition: all var(--transition);
 }
 
-.page-btn:hover {
-  background: #0196a9;
+.page-btn:hover:not(:disabled) {
+  background: var(--clr-gold);
+  color: #000;
+  border-color: var(--clr-gold);
+  box-shadow: var(--shadow-glow-gold);
 }
 
 .page-btn:disabled {
-  background: #555;
+  opacity: 0.3;
   cursor: not-allowed;
 }
 
 .page-info {
-  font-size: 1.1rem;
-  color: #ccc;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-  .movie-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  }
-
-  .page-btn {
-    padding: 8px 14px;
-    font-size: 0.9rem;
-  }
+  font-size: 0.875rem;
+  color: var(--clr-text-muted);
+  font-weight: 500;
+  min-width: 130px;
+  text-align: center;
 }

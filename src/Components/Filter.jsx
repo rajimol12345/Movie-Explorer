@@ -12,7 +12,8 @@ export default function Filter({ selectedYear, setSelectedYear, selectedGenre, s
       try {
         const res = await fetch(`https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`);
         const data = await res.json();
-        setGenres(data.genres || []);
+        const filteredGenres = (data.genres || []).filter(g => g.name !== "Romance");
+        setGenres(filteredGenres);
       } catch (err) {
         console.error("Error fetching genres:", err);
       }

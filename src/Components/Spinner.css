@@ -1,39 +1,39 @@
-.spinner-container {
+/* ============================================
+   SPINNER — Cinematic Loading Ring
+   ============================================ */
+.spinner {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  background: transparent;
-  color: transparent;
+  gap: 18px;
+  padding: 60px 20px;
 }
 
-.loader {
-  border: 16px solid rgba(255, 255, 255, 0.2);
-  border-top: 16px solid #00bcd4;
+.spinner-ring {
+  width: 52px;
+  height: 52px;
+  border: 3px solid var(--clr-surface);
+  border-top: 3px solid var(--clr-gold);
+  border-right: 3px solid var(--clr-red);
   border-radius: 50%;
-  width: 120px;
-  height: 120px;
-  animation: spin 5s linear infinite;
+  animation: spin 0.9s linear infinite;
+}
+
+.spinner-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-text-dim);
+  animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+  to { transform: rotate(360deg); }
 }
 
-.loading-text {
-  margin-top: 20px;
-  font-size: 1.2rem;
-  opacity: 0.8;
-  animation: fadeInOut 2s ease-in-out infinite;
-}
-
-@keyframes fadeInOut {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 1; }
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
 }

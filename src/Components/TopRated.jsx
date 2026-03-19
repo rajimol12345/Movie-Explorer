@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MovieCard from "./MovieCard";
 import Spinner from "./Spinner";
 import "../App.css";
+import "./Popular.css";
 
 const API_KEY = process.env.REACT_APP_TMDB_API_KEY;
 
@@ -9,11 +10,9 @@ export default function TopRated() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // Trailer popup state
   const [trailerUrl, setTrailerUrl] = useState("");
   const [showTrailer, setShowTrailer] = useState(false);
 
-  // Fetch Top Rated Movies
   const fetchTopRated = async () => {
     setLoading(true);
     try {
@@ -33,7 +32,6 @@ export default function TopRated() {
     fetchTopRated();
   }, []);
 
-  //  Fetch Trailer function
   const fetchTrailer = async (movieId) => {
     try {
       const res = await fetch(
@@ -55,8 +53,10 @@ export default function TopRated() {
   };
 
   return (
-    <div className="home-page top-rated-page">
-      <h1 className="page-title">Top Rated Movies</h1>
+    <div className="popular-page">
+      <h2 className="page-title" style={{ borderLeft: "4px solid var(--clr-gold)", paddingLeft: "16px" }}>
+        Top Rated Movies
+      </h2>
 
       {loading ? (
         <Spinner />
@@ -67,22 +67,24 @@ export default function TopRated() {
               <MovieCard
                 key={movie.id}
                 movie={movie}
-                onClick={() => fetchTrailer(movie.id)} //  Open trailer on click
+                onClick={() => fetchTrailer(movie.id)}
               />
             ))
           ) : (
-            <p style={{ textAlign: "center" }}>No top-rated movies found.</p>
+            <p style={{ textAlign: "center", color: "var(--clr-text-muted)" }}>
+              No top-rated movies found.
+            </p>
           )}
         </div>
       )}
 
-      {/*  Trailer Popup */}
+      {/* Trailer Popup */}
       {showTrailer && (
         <div className="trailer-overlay" onClick={() => setShowTrailer(false)}>
           <div className="trailer-popup" onClick={(e) => e.stopPropagation()}>
             <iframe
               width="100%"
-              height="400"
+              height="450"
               src={trailerUrl}
               title="Movie Trailer"
               frameBorder="0"
