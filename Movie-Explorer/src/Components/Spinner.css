@@ -1,0 +1,39 @@
+/* ============================================
+   SPINNER — Cinematic Loading Ring
+   ============================================ */
+.spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 60px 20px;
+}
+
+.spinner-ring {
+  width: 52px;
+  height: 52px;
+  border: 3px solid var(--clr-surface);
+  border-top: 3px solid var(--clr-gold);
+  border-right: 3px solid var(--clr-red);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+.spinner-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--clr-text-dim);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}

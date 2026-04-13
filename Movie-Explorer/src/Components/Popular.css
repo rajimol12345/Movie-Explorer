@@ -1,0 +1,167 @@
+/* ============================================
+   POPULAR PAGE & HERO
+   ============================================ */
+.popular-page {
+  min-height: 100vh;
+  background: var(--clr-bg);
+  padding-bottom: 80px;
+}
+
+.popular-hero {
+  position: relative;
+  width: 100%;
+  height: 65vh;
+  min-height: 500px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.popular-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.5) 60%,
+    transparent 100%
+  ),
+  linear-gradient(
+    to top,
+    var(--clr-bg) 0%,
+    rgba(0,0,0,0) 25%
+  );
+}
+
+.popular-hero-content {
+  position: relative;
+  z-index: 10;
+  padding: 40px 5%;
+  max-width: 900px;
+}
+
+.popular-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  color: #fff;
+  margin-bottom: 16px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.popular-hero-overview {
+  font-size: 1.1rem;
+  color: #ddd;
+  line-height: 1.6;
+  margin-bottom: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.popular-hero-buttons .btn-primary {
+  background: var(--clr-gold);
+  color: #000;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--transition);
+}
+
+.popular-hero-buttons .btn-primary:hover {
+  background: #fff;
+  transform: scale(1.05);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+/* ============================================
+   GRID CONTENT
+   ============================================ */
+.popular-content-wrapper {
+  padding: 0 5%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.popular-content-wrapper .section-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: var(--clr-text);
+  margin-bottom: 24px;
+  padding-left: 16px;
+  border-left: 4px solid var(--clr-gold);
+}
+
+.popular-page .movie-grid {
+  margin: 0 auto 40px;
+}
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 40px auto;
+  max-width: var(--max-width);
+}
+
+.page-btn {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-muted);
+  border-radius: var(--radius-pill);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--clr-gold);
+  color: #000;
+  border-color: var(--clr-gold);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 0.875rem;
+  color: var(--clr-text-muted);
+  font-weight: 500;
+  min-width: 120px;
+  text-align: center;
+}
+
+/* Trailer popup (inherited from App.css — these are local overrides) */
+.popular-page .trailer-overlay {
+  z-index: 2000;
+}
+
+@media (max-width: 768px) {
+  .popular-page {
+    padding-bottom: 60px;
+  }
+}

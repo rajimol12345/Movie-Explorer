@@ -1,0 +1,91 @@
+/* ============================================
+   MOVIE EXPLORER — Global Design Tokens
+   ============================================ */
+
+:root {
+  /* Colors */
+  --clr-bg:         #0a0a0f;
+  --clr-bg-2:       #111118;
+  --clr-bg-card:    #13131c;
+  --clr-bg-glass:   rgba(12, 12, 20, 0.75);
+  --clr-surface:    #1a1a27;
+
+  --clr-gold:       #f5c518;
+  --clr-gold-dim:   #c9a214;
+  --clr-red:        #e50914;
+  --clr-red-hover:  #ff1b2d;
+
+  --clr-text:       #f0f0f0;
+  --clr-text-muted: #9096a5;
+  --clr-text-dim:   #5f6475;
+  --clr-border:     rgba(255, 255, 255, 0.07);
+
+  /* Typography */
+  --font-display:   'Bebas Neue', 'Impact', sans-serif;
+  --font-body:      'Inter', 'Segoe UI', sans-serif;
+
+  /* Shadows */
+  --shadow-card:    0 4px 24px rgba(0, 0, 0, 0.6);
+  --shadow-glow-gold: 0 0 20px rgba(245, 197, 24, 0.35);
+  --shadow-glow-red:  0 0 20px rgba(229, 9, 20, 0.45);
+  --shadow-popup:   0 8px 48px rgba(0, 0, 0, 0.9);
+
+  /* Border radius */
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+  --radius-pill: 999px;
+
+  /* Transitions */
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --max-width: 1280px;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--clr-bg);
+  color: var(--clr-text);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--clr-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--clr-surface);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--clr-gold-dim);
+}

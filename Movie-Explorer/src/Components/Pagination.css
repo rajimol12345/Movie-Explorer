@@ -1,0 +1,45 @@
+/* Pagination shared — already covered in Popular.css and App.css */
+/* This file retains the pagination pill style for any component that imports it */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  margin: 40px auto;
+  max-width: var(--max-width);
+}
+
+.page-btn {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-muted);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.page-btn:hover:not(:disabled) {
+  background: var(--clr-gold);
+  color: #000;
+  border-color: var(--clr-gold);
+  box-shadow: var(--shadow-glow-gold);
+}
+
+.page-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 0.875rem;
+  color: var(--clr-text-muted);
+  font-weight: 500;
+  min-width: 130px;
+  text-align: center;
+}
